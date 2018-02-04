@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bot::Plugins
   class SendStart
     def self.call(message:)
@@ -11,7 +13,6 @@ module Bot::Plugins
     def call
       Bot.api.send_message(chat_id: message.chat.id,
                            text: Settings.chat_params.help)
-                        
     end
   end
 end

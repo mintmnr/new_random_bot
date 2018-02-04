@@ -13,6 +13,8 @@ end
 
 require_relative 'db.rb'
 require_relative 'token.rb'
+require_relative 'task_observer.rb'
+
 
 Config.load_and_set_settings(Config.setting_files(__dir__, 'development'))
 # require_relative 'config/enviroment.rb'

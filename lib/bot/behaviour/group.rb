@@ -19,7 +19,7 @@ module Bot::Behaviour
 
     def mem_repsonse
       Bot::Plugins.SendImage.call(message: message,
-                             folder: "mems")
+                                  folder: 'mems')
     end
 
     def prediction_response

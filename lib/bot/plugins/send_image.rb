@@ -7,7 +7,9 @@ module Bot::Plugins
     MEM_PATH =  '../../../content/'
 
     def self.call(message:, folder:)
-      new(message, folder).call
+      Concurrent::Future.execute do
+        new(message, folder).call
+      end
     end
 
     def initialize(message, folder)

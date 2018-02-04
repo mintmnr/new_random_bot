@@ -11,6 +11,7 @@ module Bot::Behaviour
     def handle
       messages.each do |message|
         commands = CommandFinder.find(message)
+        puts "Commands: #{commands}"
         next if commands.empty?
         send("#{commands.first}_response", message)
       end
@@ -20,7 +21,7 @@ module Bot::Behaviour
 
     def mem_response(message)
       Bot::Plugins::SendImage.call(message: message,
-                                   folder: "mems")
+                                   folder: 'mems')
     end
 
     def prediction_response(message)
