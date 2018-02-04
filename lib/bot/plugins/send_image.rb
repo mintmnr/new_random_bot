@@ -1,8 +1,14 @@
+# frozen_string_literal: true
+
 module Bot::Plugins
-  class SendImage 
+  class SendImage
     attr_reader :folder
 
-    MEM_PATH =  "../../../content/"
+    MEM_PATH =  '../../../content/'
+
+    def self.call(message:, folder:)
+      new(message, folder).call
+    end
 
     def initialize(message, folder)
       @message = message
@@ -10,23 +16,22 @@ module Bot::Plugins
     end
 
     def call
-      Bot.get.api.sendPhoto(chat_id: @message.chat.id,
-                       photo: Faraday::UploadIO.new(select_random, 'image/png'))
+      Bot.api.sendPhoto(chat_id: @message.chat.id,
+                        photo: Faraday::UploadIO.new(select_random, 'image/png'))
     end
 
     private
 
     def select_random
       name = files.sample
-      File.open(File.join(File.dirname(__FILE__), 
+      File.open(File.join(File.dirname(__FILE__),
                           "#{MEM_PATH}/#{folder}/#{name}"))
     end
 
     def files
-      f = Dir.entries(File.join(File.dirname(__FILE__),  
+      f = Dir.entries(File.join(File.dirname(__FILE__),
                                 "#{MEM_PATH}/#{folder}"))
       f[2..-1]
     end
   end
 end
-

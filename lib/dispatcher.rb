@@ -29,7 +29,7 @@ module Dispatcher
     def sort_by_chat(messages)
       messages.each_with_object({}) do |msg, res|
         res[msg.chat.type] ||= []
-        res[msg.chat.type] << msg  
+        res[msg.chat.type] << msg
       end
     end
   end
