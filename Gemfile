@@ -13,3 +13,5 @@ gem 'config'
 gem 'concurrent-ruby'
 
 gem 'pry'
+
+gem 'unicode'

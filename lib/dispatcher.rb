@@ -13,15 +13,15 @@ module Dispatcher
     private
 
     def handle_supergroup_messages(messages)
-      Bot::Behaviour::Group.handle(messages)
+      Bot::Behaviour::Group.new(messages).handle
     end
 
     def handle_group_messages(messages)
-      Bot::Behaviour::Group.handle(messages)
+      Bot::Behaviour::Group.new(messages).handle
     end
 
     def handle_private_messages(messages)
-      Bot::Behaviour::Private.handle(messages)
+      Bot::Behaviour::Private.new(messages).handle
     end
 
     def handle_channel_messages(messages); end

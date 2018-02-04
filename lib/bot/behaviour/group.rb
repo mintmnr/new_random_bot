@@ -1,15 +1,37 @@
 # frozen_string_literal: true
 
 module Bot::Behaviour
-  module Group
-    def self.handle(messages)
+  class Group
+    attr_reader :messages
+
+    def initialize(messages)
+      @messages = messages
+    end
+
+    def handle
       messages.each do |message|
-        # Bot.api.send_message(chat_id: message.chat.id,
-        # text: 'group handled')
-        # Bot::Plugins::SendImage.call(message: message,
-        # folder: 'mems')
-        Bot::Plugins::SendPrediction.call(message: message)
+        commands = CommandFinder.find(message)
+        send("#{commands.first}_response", message)
       end
+    end
+
+    private
+
+    def mem_repsonse
+      Bot::Plugins.SendImage.call(message: message,
+                             folder: "mems")
+    end
+
+    def prediction_response
+      Bot::Plugins.SendPrediction(message: message)
+    end
+
+    def help_response
+      Bot::Plugins.SendHelp(message: message)
+    end
+
+    def start_response
+      Bot::Plugins.SendStart(message: message)
     end
   end
 end

@@ -4,6 +4,7 @@ require 'pry'
 require 'telegram/bot'
 require 'config'
 require 'concurrent'
+require 'unicode'
 
 def require_folder(path)
   Dir.glob((File.dirname(File.absolute_path(__FILE__)) + '/' + path + '**/*.rb'))
