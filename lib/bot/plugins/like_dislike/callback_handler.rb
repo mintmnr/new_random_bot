@@ -14,7 +14,7 @@ module Bot::Plugins
         end
 
         vote = add_vote(event, message)
-        Updater.call(event, message) if vote
+        ButtonsUpdater.call(event, message) if vote
       end
 
         private

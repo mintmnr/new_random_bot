@@ -4,10 +4,12 @@ bot:
 chat_ids:
   - -1001178408117
 
-
 chat_params:
-  start: 'Привет, тут редактируемый текст'
-  help: 'Попроси мем или предсказание'
+  static: 
+    start: 'Привет, тут редактируемый текст'
+    help: 'Попроси мем или предсказание'
+    private: 'Личные сообщения отключены. Пишите в чат https://t.me/membott'
+    
 
   commands:
     help: 
@@ -16,17 +18,19 @@ chat_params:
       - помогите
       - помагите
 
-    hello: 
+    start: 
+      - /start
       - привет
       - прив
-      - /start
+
     prediction:
+      - /prediction
       - предсказание 
       - прогноз
       - предскажи 
-      - /prediction
 
     mem: 
+      - /mem
       - мем
       - мемас
       - мемчик
@@ -38,4 +42,3 @@ chat_params:
       - мемас
       - мемцова
       - мамасик
-      - /mem

@@ -23,19 +23,12 @@ require_folder('initializers')
 
 require_folder('../lib/listen_loop')
 
-require_folder('../lib/bot')
-require_folder('../lib/bot/*')
+require_folder('../lib/bot/**/*')
 
 require_folder('../lib/models')
 require_folder('../lib/helpers')
 
 require_folder('../lib/services')
-require_folder('../lib/services/like_dislike')
-
-require_folder('../lib/domains')
-require_folder('../lib/domains/*')
-
-require_folder('../lib/job')
 
 require_relative '../lib/dispatcher.rb'
 require_relative '../lib/bot_initializer.rb'

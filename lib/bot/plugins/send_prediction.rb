@@ -17,8 +17,10 @@ module Bot::Plugins
     end
 
     def call
-      Bot.api.send_message(chat_id: message.chat.id,
-                           text: make_prediction)
+      Concurrent::Future.execute do
+        Bot.api.send_message(chat_id: message.chat.id,
+                             text: make_prediction)
+      end
     end
 
     def make_prediction
@@ -40,21 +42,5 @@ module Bot::Plugins
        pr['what'].sample,
        pr['happened'].sample].join(' ')
     end
-
-    # def date
-    # Prediction::Dictionary.date.sample
-    # end
-
-    # def to
-    # Prediction::Dictionary.to.sample
-    # end
-
-    # def what
-    # Prediction::Dictionary.what.sample
-    # end
-
-    # def happened
-    # Prediction::Dictionary.happened.sample
-    # end
   end
 end

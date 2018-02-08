@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
 module Bot::Plugins
-  class SendHelp
-    def self.call(message:)
-      new(message).call
+  class SendText
+    def self.call(message:, text:)
+      new(message, text).call
     end
 
-    def initialize(message)
+    def initialize(message, text)
       @message = message
+      @text = text
     end
 
     def call
-      Bot.api.send_message(chat_id: message.chat.id,
-                           text: Settings.chat_params.help)
+      Concurrent::Future.execute do
+        Bot.api.send_message(chat_id: @message.chat.id, text: @text)
+      end
     end
   end
 end

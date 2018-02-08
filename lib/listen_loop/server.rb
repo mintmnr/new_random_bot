@@ -6,13 +6,14 @@ module ListenLoop
 
     def self.start
       Bot.logger.info('Starting bot')
-      @server = Concurrent::TimerTask.new(execution_interval: 1,
-                                          timeout_interval: 5,
-                                          dup_on_deref: true) do
+      @server = Concurrent::TimerTask.new(execution_interval: 0.5,
+                                          timeout_interval: 1) do
         messages = MessageFetcher.fetch
 
-        puts messages.inspect
-        ::Dispatcher.handle(messages)
+         if !messages.empty?
+          ::Dispatcher.handle(messages)
+         end
+         true
       end
 
       @server.add_observer(TaskObserver.new)

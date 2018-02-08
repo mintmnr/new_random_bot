@@ -2,7 +2,7 @@
 
 module Bot::Plugins
   module LikeDislike
-    class Updater
+    class ButtonsUpdater
       def self.call(event, message)
         Bot.api.editMessageReplyMarkup(chat_id: message.chat.id,
                                        message_id: event.response_message_id,

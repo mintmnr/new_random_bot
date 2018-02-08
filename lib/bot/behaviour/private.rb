@@ -10,30 +10,9 @@ module Bot::Behaviour
 
     def handle
       messages.each do |message|
-        commands = CommandFinder.find(message)
-        puts "Commands: #{commands}"
-        next if commands.empty?
-        send("#{commands.first}_response", message)
+        Bot::Plugins::SendText.call(message: message,
+                               text: Settings.chat_params.static.private)
       end
-    end
-
-    private
-
-    def mem_response(message)
-      Bot::Plugins::SendImage.call(message: message,
-                                   folder: 'mems')
-    end
-
-    def prediction_response(message)
-      Bot::Plugins::SendPrediction.call(message: message)
-    end
-
-    def help_response(message)
-      Bot::Plugins::SendHelp.call(message: message)
-    end
-
-    def start_response(message)
-      Bot::Plugins::SendStart.call(message: message)
     end
   end
 end
