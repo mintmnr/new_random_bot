@@ -17,10 +17,8 @@ module Bot::Plugins
     end
 
     def call
-      Concurrent::Future.execute do
-        Bot.api.send_message(chat_id: message.chat.id,
-                             text: make_prediction)
-      end
+      Bot.api.send_message(chat_id: message.chat.id,
+                           text: make_prediction)
     end
 
     def make_prediction

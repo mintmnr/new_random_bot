@@ -25,7 +25,7 @@ require_folder('../lib/listen_loop')
 
 require_folder('../lib/bot/**/*')
 
-require_folder('../lib/models')
+require_folder('../lib/models/**/*')
 require_folder('../lib/helpers')
 
 require_folder('../lib/services')

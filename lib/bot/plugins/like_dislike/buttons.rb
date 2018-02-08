@@ -4,35 +4,39 @@ module Bot::Plugins
   module LikeDislike
     module Buttons
       class << self
-        def new_markup
+        def build(message)
           buttons = [
             [
-              Telegram::Bot::Types::InlineKeyboardButton.new(text: '♥️',
-                                                             callback_data: 'like'),
-              Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔',
-                                                             callback_data: 'dislike')
+              Telegram::Bot::Types::InlineKeyboardButton
+              .new(text: like_message(message), callback_data: 'like'),
+              Telegram::Bot::Types::InlineKeyboardButton
+              .new(text: dislike_message(message), callback_data: 'dislike')
             ]
           ]
           Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: buttons)
         end
+      end
 
-        def for_event(event)
-          like_count = event.votes.where(score: 'like').length
-          like_message = like_count.zero? ? '♥️' : "#{like_count} ♥️"
+      private 
 
-          dislike_count = event.votes.where(score: 'dislike').length
-          dislike_message = dislike_count.zero? ? '💔' : "#{dislike_count} 💔"
-
-          buttons = [
-            [
-              Telegram::Bot::Types::InlineKeyboardButton.new(text: like_message,
-                                                             callback_data: 'like'),
-              Telegram::Bot::Types::InlineKeyboardButton.new(text: dislike_message,
-                                                             callback_data: 'dislike')
-            ]
-          ]
-          Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: buttons)
+      def like_message(message)
+        if message.like_message
+          count = message.like_dislike&.votes&.where(score: 'like')
+        else
+          count = 0
         end
+
+        count.zero? ? '♥️' : "#{count} ♥️"
+      end
+
+      def dislike_message(message)
+        if message.like_message
+          count = message.like_dislike&.votes&.where(score: 'dislike')
+        else
+          count = 0
+        end
+
+        count.zero? ? '💔' : "#{count} 💔"
       end
     end
   end

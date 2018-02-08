@@ -12,9 +12,7 @@ module Bot::Plugins
     end
 
     def call
-      Concurrent::Future.execute do
-        Bot.api.send_message(chat_id: @message.chat.id, text: @text)
-      end
+      Bot.api.send_message(chat_id: @message.chat.id, text: @text)
     end
   end
 end

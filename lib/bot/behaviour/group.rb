@@ -4,7 +4,6 @@ module Bot::Behaviour
   class Group
     attr_reader :messages
 
-
     def initialize(messages)
       @messages = messages
     end
@@ -12,8 +11,8 @@ module Bot::Behaviour
     def handle
       messages.each do |message|
         commands = CommandFinder.find(message)
-        puts commands
-        next if commands.empty? 
+        next if commands.empty?
+
         send("#{commands.first}_response", message)
       end
     end
@@ -21,22 +20,29 @@ module Bot::Behaviour
     private
 
     def mem_response(message)
-      Bot::Plugins::SendImage.call(message: message,
-                                  folder: 'mems')
+      MessageSender.call do
+        Bot::Plugins::SendImage.call(message: message, folder: 'mems')
+      end
     end
 
     def prediction_response(message)
-      Bot::Plugins::SendPrediction.call(message: message)
+      MessageSender.call do
+        Bot::Plugins::SendPrediction.call(message: message)
+      end
     end
 
     def help_response(message)
-      Bot::Plugins::SendText.call(message: message, 
-                            text: Settings.chat_params.static.help)
+      MessageSender.call do
+        Bot::Plugins::SendText.call(message: message,
+                                    text: Settings.chat_params.static.help)
+      end
     end
 
     def start_response(message)
-      Bot::Plugins::SendText.call(message: message,
-                            text: Settings.chat_params.static.start)
+      MessageSender.call do
+        Bot::Plugins::SendText.call(message: message,
+                                    text: Settings.chat_params.static.start)
+      end
     end
   end
 end

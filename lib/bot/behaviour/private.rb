@@ -11,7 +11,7 @@ module Bot::Behaviour
     def handle
       messages.each do |message|
         Bot::Plugins::SendText.call(message: message,
-                               text: Settings.chat_params.static.private)
+                                    text: Settings.chat_params.static.private)
       end
     end
   end

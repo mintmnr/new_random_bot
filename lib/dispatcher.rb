@@ -5,8 +5,8 @@ module Dispatcher
     def handle(messages)
       parsed_messages = messages.map { |m| MessageParser.new(m) }
 
-      sort_by_chat(parsed_messages).each do |chat_type, messages|
-        send("handle_#{chat_type}_messages", messages)
+      sort_by_chat(parsed_messages).each do |chat_type, msgs|
+        send("handle_#{chat_type}_messages", msgs)
       end
     end
 

@@ -10,10 +10,8 @@ module ListenLoop
                                           timeout_interval: 1) do
         messages = MessageFetcher.fetch
 
-         if !messages.empty?
-          ::Dispatcher.handle(messages)
-         end
-         true
+        ::Dispatcher.handle(messages) unless messages.empty?
+        true
       end
 
       @server.add_observer(TaskObserver.new)
