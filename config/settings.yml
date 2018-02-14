@@ -9,7 +9,12 @@ chat_params:
     start: 'Привет, тут редактируемый текст'
     help: 'Попроси мем или предсказание'
     private: 'Личные сообщения отключены. Пишите в чат https://t.me/membott'
-    
+
+  buttons:
+    share: Поделиться с друзьями
+  
+  mem:
+    after_message: Ну как?
 
   commands:
     help: 

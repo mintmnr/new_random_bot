@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# require_relative './dictionary'
-
 module Bot::Plugins
   class SendPrediction
     attr_reader :message

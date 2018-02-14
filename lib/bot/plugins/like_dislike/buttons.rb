@@ -8,35 +8,35 @@ module Bot::Plugins
           buttons = [
             [
               Telegram::Bot::Types::InlineKeyboardButton
-              .new(text: like_message(message), callback_data: 'like'),
+                .new(text: like_message(message), callback_data: 'like'),
               Telegram::Bot::Types::InlineKeyboardButton
-              .new(text: dislike_message(message), callback_data: 'dislike')
+                .new(text: dislike_message(message), callback_data: 'dislike')
             ]
           ]
           Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: buttons)
         end
-      end
 
-      private 
+        private
 
-      def like_message(message)
-        if message.like_message
-          count = message.like_dislike&.votes&.where(score: 'like')
-        else
-          count = 0
+        def like_message(message)
+          count = if message.like_dislike
+                    message.like_dislike&.votes&.where(score: 'like') || 0
+                  else
+                    0
+                  end
+
+          count.zero? ? '♥️' : "#{count} ♥️"
         end
 
-        count.zero? ? '♥️' : "#{count} ♥️"
-      end
+        def dislike_message(message)
+          count = if message.like_dislike
+                    message.like_dislike&.votes&.where(score: 'dislike') || 0
+                  else
+                    0
+                  end
 
-      def dislike_message(message)
-        if message.like_message
-          count = message.like_dislike&.votes&.where(score: 'dislike')
-        else
-          count = 0
+          count.zero? ? '💔' : "#{count} 💔"
         end
-
-        count.zero? ? '💔' : "#{count} 💔"
       end
     end
   end

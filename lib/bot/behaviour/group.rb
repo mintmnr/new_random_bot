@@ -21,7 +21,14 @@ module Bot::Behaviour
 
     def mem_response(message)
       MessageSender.call do
-        Bot::Plugins::SendImage.call(message: message, folder: 'mems')
+        msg = Bot::Plugins::SendImage.call(message: message, folder: 'mems')
+
+        msg = Telegram::Bot::Types::Update.new(message: msg['result']).message
+        share_kb = Bot::Plugins::Share.new(msg).build_keyboard
+
+        Bot.api.send_message(chat_id: message.chat.id,
+                             text: Settings.chat_params.mem.after_message,
+                             reply_markup: share_kb)
       end
     end
 

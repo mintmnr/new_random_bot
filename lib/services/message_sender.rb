@@ -12,7 +12,7 @@ module MessageSender
       end
     end
 
-    private 
+    private
 
     def save_message(data)
       MessageSaver.call(data)

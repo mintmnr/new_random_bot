@@ -13,5 +13,6 @@ class Message
 
   belongs_to :chat
 
-  embeds_one :like_dislike
+  embeds_one :like_dislike,
+    class_name: 'Plugins::LikeDislike'
 end

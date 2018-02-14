@@ -12,8 +12,6 @@ end
 
 desc 'run'
 task :listen do
-  BotInitializer.setup_bot
-
   ListenLoop::Server.start
 
   Pry.start

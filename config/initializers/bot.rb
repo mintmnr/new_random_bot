@@ -14,3 +14,20 @@ class Bot
     end
   end
 end
+
+class BotInitializer
+  class << self
+    def setup_bot(_token = nil)
+      @token = get_token
+      bot = Telegram::Bot::Client.new(@token,
+                                logger: Logger.new($stdout))
+      Bot.set(bot)
+    end
+
+    def get_token
+      Token.get('test') || token
+    end
+  end
+end
+
+BotInitializer.setup_bot
