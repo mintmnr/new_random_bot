@@ -3,7 +3,8 @@
 module Token
   def self.get(env = 'test')
     {
-      'test' => '475166232:AAEID56y8Jf3POkH6Lkl6H7pQOrpm1W7VQY',
+      'test' => File.read(File.join(
+        File.dirname(__FILE__), '../.token')).strip,
       'production' => ENV['bot_token']
     }[env]
   end
