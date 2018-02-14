@@ -12,7 +12,17 @@ end
 
 desc 'run'
 task :listen do
+  ARGV.clear
   ListenLoop::Server.start
 
+  Pry.start
+end
+
+desc 'run notification sender'
+task :notification do
+  ARGV.clear
+  BotInitializer.setup_bot
+
+  Bot::Behaviour::Notification.call
   Pry.start
 end

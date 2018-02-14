@@ -4,6 +4,13 @@ bot:
 chat_ids:
   - -1001178408117
 
+notifications:
+  chats:
+    - id: '-1001302807347'
+      message: повторяющееся сообщение
+      interval: 10
+
+
 chat_params:
   static: 
     start: 'Привет, тут редактируемый текст'
