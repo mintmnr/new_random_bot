@@ -18,10 +18,10 @@ chat_params:
     private: 'Личные сообщения отключены. Пишите в чат https://t.me/membott'
 
   buttons:
-    share: Поделиться с друзьями
+    share: Отправить другу
   
   mem:
-    after_message: Ну как?
+    after_message: Нравится? - Отправь другу!
 
   commands:
     help: 
